@@ -119,7 +119,7 @@ function fnJWTAuthenticate(req, res, next) {
 }
 
 function NoTransactionFound(res) {
-  return res.status(404).send({ data: null, message: "No Transaction found" });
+  return res.status(404).send({ data: null, message: "No Transactions found" });
 }
 
 module.exports = router;

@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 const router = require("express").Router();
 const Users = require("../Models/Users");
 
@@ -10,11 +11,14 @@ router.post("/", async (req, res) => {
     if (isUserExists != null) {
       res.status(401).send("User already exists, please try to login.");
     } else {
+      const bcryptedPassword = await bcrypt.hash(password, 10);
+      console.log(bcryptedPassword);
       const user = new Users({
         name,
         email,
-        password,
+        password: bcryptedPassword,
       });
+      console.log("1");
       const savedUser = await user.save();
       res.status(201).send(savedUser);
     }
